@@ -62,6 +62,11 @@ class AiController extends GetxController {
     //Waiting 1 second before playing
     await Future.delayed(const Duration(seconds: 1));
 
+    if(intelligentLogic(computer)==true||intelligentLogic(human)==true||captureCenter()==true){
+      return;
+    }
+
+
     //keeping a set for avoiding infinite looping
     Set<String> checkSet = <String>{};
 
@@ -142,6 +147,208 @@ class AiController extends GetxController {
     coverObjectVisibility = false.obs;
     gameStatus = '-1'.obs;
     selectedNumbers = [];
+    update();
+  }
+
+  //logic for checking and making a winning move
+  bool winningLogic(){
+
+    if(computer.contains(1)&&computer.contains(2)){
+
+    }
+    return false;
+  }
+
+//logic of not letting the user to win
+  bool intelligentLogic(List<int>checkList) {
+
+    //first row logic horizontal
+    if (checkList.contains(1) && checkList.contains(2)&&!selectedNumbers.contains([0,2].join())) {
+      // if(selectedNumbers.contains([0,2].join())){
+      //   return false;
+      // }
+      finishComputerMove(0, 2);
+      return true;
+    }else if(checkList.contains(1) && checkList.contains(3)&&!selectedNumbers.contains([0,1].join())){
+      // if(selectedNumbers.contains([0,1].join())){
+      //   return false;
+      // }
+      finishComputerMove(0, 1);
+      return true;
+    }else if(checkList.contains(2) && checkList.contains(3)&&!selectedNumbers.contains([0,0].join())){
+      // if(selectedNumbers.contains([0,0].join())){
+      //   return false;
+      // }
+      finishComputerMove(0, 0);
+      return true;
+
+      //second row logic horizontal
+    }else if(checkList.contains(4) && checkList.contains(5)&&!selectedNumbers.contains([1,2].join())) {
+      // if(selectedNumbers.contains([1,2].join())){
+      //   return false;
+      // }
+      finishComputerMove(1, 2);
+      return true;
+    }else if(checkList.contains(4) && checkList.contains(6)&&!selectedNumbers.contains([1,1].join())){
+      // if(selectedNumbers.contains([1,1].join())){
+      //   return false;
+      // }
+      finishComputerMove(1, 1);
+      return true;
+    }else if(checkList.contains(5) && checkList.contains(6)&&!selectedNumbers.contains([1,0].join())){
+      // if(selectedNumbers.contains([1,0].join())){
+      //   return false;
+      // }
+      finishComputerMove(1, 0);
+      return true;
+
+      //thrid row logic horizontal
+    }else if(checkList.contains(7) && checkList.contains(8)&&!selectedNumbers.contains([2,2].join())) {
+      // if(selectedNumbers.contains([2,2].join())){
+      //   return false;
+      // }
+      finishComputerMove(2, 2);
+      return true;
+    }else if(checkList.contains(7) && checkList.contains(9)&&!selectedNumbers.contains([2,1].join())){
+      // if(selectedNumbers.contains([2,1].join())){
+      //   return false;
+      // }
+      finishComputerMove(2, 1);
+      return true;
+    }else if(checkList.contains(8) && checkList.contains(9)&&!selectedNumbers.contains([2,0].join())){
+      // if(selectedNumbers.contains([2,0].join())){
+      //   return false;
+      // }
+      finishComputerMove(2, 0);
+      return true;
+
+      //first column logic vertical
+    }else if(checkList.contains(1) && checkList.contains(4)&&!selectedNumbers.contains([2,0].join())) {
+      // if(selectedNumbers.contains([2,0].join())){
+      //   return false;
+      // }
+      finishComputerMove(2,0);
+      return true;
+    }else if(checkList.contains(1) && checkList.contains(7)&&!selectedNumbers.contains([1,0].join())){
+      // if(selectedNumbers.contains([1,0].join())){
+      //   return false;
+      // }
+      finishComputerMove(1,0);
+      return true;
+    }else if(checkList.contains(4) && checkList.contains(7)&&!selectedNumbers.contains([0,0].join())){
+      // if(selectedNumbers.contains([0,0].join())){
+      //   return false;
+      // }
+      finishComputerMove(0, 0);
+      return true;
+
+      //second column logic vertical
+    }else if(checkList.contains(2) && checkList.contains(5)&&!selectedNumbers.contains([2,1].join())) {
+      // if(selectedNumbers.contains([2,1].join())){
+      //   return false;
+      // }
+      finishComputerMove(2,1);
+      return true;
+    }else if(checkList.contains(2) && checkList.contains(8)&&!selectedNumbers.contains([1,1].join())){
+      // if(selectedNumbers.contains([1,1].join())){
+      //   return false;
+      // }
+      finishComputerMove(1,1);
+      return true;
+    }else if(checkList.contains(5) && checkList.contains(8)&&!selectedNumbers.contains([0,1].join())){
+      // if(selectedNumbers.contains([0,1].join())){
+      //   return false;
+      // }
+      finishComputerMove(0, 1);
+      return true;
+
+      //third column logic vertical
+    }else if(checkList.contains(3) && checkList.contains(6)&&!selectedNumbers.contains([2,2].join())) {
+      // if(selectedNumbers.contains([2,2].join())){
+      //   return false;
+      // }
+      finishComputerMove(2,2);
+      return true;
+    }else if(checkList.contains(3) && checkList.contains(9)&&!selectedNumbers.contains([1,2].join())){
+      // if(selectedNumbers.contains([1,2].join())){
+      //   return false;
+      // }
+      finishComputerMove(1,2);
+      return true;
+    }else if(checkList.contains(6) && checkList.contains(9)&&!selectedNumbers.contains([0,2].join())){
+      // if(selectedNumbers.contains([0,2].join())){
+      //   return false;
+      // }
+      finishComputerMove(0, 2);
+      return true;
+
+      //first diagonal logic , top left to bottom right
+    }else if(checkList.contains(1) && checkList.contains(5)&&!selectedNumbers.contains([2,2].join())) {
+      // if(selectedNumbers.contains([2,2].join())){
+      //   return false;
+      // }
+      finishComputerMove(2,2);
+      return true;
+    }else if(checkList.contains(1) && checkList.contains(9)&&!selectedNumbers.contains([1,1].join())){
+      // if(selectedNumbers.contains([1,1].join())){
+      //   return false;
+      // }
+      finishComputerMove(1,1);
+      return true;
+    }else if(checkList.contains(5) && checkList.contains(9)&&!selectedNumbers.contains([0,0].join())){
+      // if(selectedNumbers.contains([0,0].join())){
+      //   return false;
+      // }
+      finishComputerMove(0, 0);
+      return true;
+
+      //second diagonal logic , top right to bottom left
+    }else if(checkList.contains(3) && checkList.contains(5)&&!selectedNumbers.contains([2,0].join())) {
+      // if(selectedNumbers.contains([2,0].join())){
+      //   return false;
+      // }
+      finishComputerMove(2,0);
+      return true;
+    }else if(checkList.contains(3) && checkList.contains(7)&&!selectedNumbers.contains([1,1].join())){
+      // if(selectedNumbers.contains([1,1].join())){
+      //   return false;
+      // }
+      finishComputerMove(1,1);
+      return true;
+    }else if(checkList.contains(5) && checkList.contains(7)&&!selectedNumbers.contains([0,2].join())){
+      // if(selectedNumbers.contains([0,2].join())){
+      //   return false;
+      // }
+      finishComputerMove(0, 2);
+      return true;
+    }
+
+    return false;
+  }
+
+  bool captureCenter(){
+    if(!selectedNumbers.contains([1,1].join())){
+      finishComputerMove(1, 1);
+      return true;
+    }
+
+    return false;
+  }
+
+  void finishComputerMove(int x, int y) {
+    //Selecting the computer selected box
+    selectedNumbers.add([x, y].join());
+
+    //Saving the selected indexes for future checking
+    computer.add(list[x][y]);
+    list[x][y] = -1;
+    if (checkWinStatus(computer) == true) {
+      gameStatus = '1'.obs;
+      update();
+      Get.snackbar('You Loose', 'Try Again',
+          backgroundColor: Colors.red, colorText: Colors.white);
+    }
+    coverObjectVisibility = false.obs;
     update();
   }
 }

@@ -43,13 +43,11 @@ class LocalController extends GetxController {
     //for rebuilding the UI -Getx
     update();
 
-    //Giving computer the chance to play
+    //Giving player 2 the chance to play
   }
 
-  //Computer Turn function
-  void player2Move(int x, int y) async {
-    //Waiting 1 second before playing
-    await Future.delayed(const Duration(seconds: 1));
+  //player 2 Turn function
+  void player2Move(int x, int y) {
 
     //keeping a set for avoiding infinite looping
     Set<String> checkSet = <String>{};
@@ -76,7 +74,7 @@ class LocalController extends GetxController {
       }
     }
 
-    //Selecting the computer selected box
+    //Selecting the player 2 selected box
     selectedNumbers.add([x, y].join());
 
     //Saving the selected indexes for future checking
